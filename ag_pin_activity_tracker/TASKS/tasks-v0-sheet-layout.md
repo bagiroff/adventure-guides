@@ -34,13 +34,13 @@ Example:
 
 ## Tasks
 
-- [ ] 0.0 Create feature branch
-  - [ ] 0.1 `git checkout -b feature/frontend-v0-sheet-layout`
+- [x] 0.0 Create feature branch
+  - [x] 0.1 `git checkout -b feature/frontend-v0-sheet-layout`
 
-- [ ] 1.0 Scaffold tracker route and feature shell
-  - [ ] 1.1 Create tracker route page (`/tracker`) with authenticated page shell
-  - [ ] 1.2 Add top-level `SheetLayout` component and wire route to it
-  - [ ] 1.3 Add placeholder loading and empty shell states for initial integration
+- [x] 1.0 Scaffold tracker route and feature shell
+  - [x] 1.1 Create tracker route page (`/tracker`) with authenticated page shell
+  - [x] 1.2 Add top-level `SheetLayout` component and wire route to it
+  - [x] 1.3 Add placeholder loading and empty shell states for initial integration
 
 - [ ] 2.0 Define contracts and API read integration
   - [ ] 2.1 Create TypeScript types for hierarchy, child achievements, and completion state

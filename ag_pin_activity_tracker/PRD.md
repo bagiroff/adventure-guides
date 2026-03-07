@@ -273,6 +273,90 @@ Conceptual boundaries:
 ### Related Architecture Records
 - Deployment Decision Record (ADR): `docs/adr/0001-deployment-decision-record.md`
 
+### v0 Repository Structure (Planned, Validated)
+
+```text
+ag_pin_activity_tracker/
+├── PRD.md
+├── FEATURES/
+│   ├── backend/
+│   └── frontend/
+├── TASKS/
+├── docs/
+│   └── adr/
+├── design/
+├── frontend/                          # Next.js app (Vercel)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── (public)/
+│   │   │   │   └── login/
+│   │   │   │       └── page.tsx
+│   │   │   ├── (authenticated)/
+│   │   │   │   ├── layout.tsx
+│   │   │   │   ├── dashboard/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── tracker/
+│   │   │   │       └── page.tsx
+│   │   │   ├── api/
+│   │   │   ├── favicon.ico
+│   │   │   ├── globals.css
+│   │   │   └── layout.tsx
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   │   ├── components/
+│   │   │   │   ├── hooks/
+│   │   │   │   ├── lib/
+│   │   │   │   └── types.ts
+│   │   │   ├── tracker/
+│   │   │   │   ├── components/
+│   │   │   │   │   ├── tracker-sheet.tsx
+│   │   │   │   │   ├── tracker-row.tsx
+│   │   │   │   │   └── completion-modal.tsx
+│   │   │   │   ├── hooks/
+│   │   │   │   ├── lib/
+│   │   │   │   └── types.ts
+│   │   │   ├── uploads/
+│   │   │   │   ├── components/
+│   │   │   │   ├── lib/
+│   │   │   │   └── types.ts
+│   │   │   └── profile/
+│   │   │       ├── components/
+│   │   │       ├── lib/
+│   │   │       └── types.ts
+│   │   ├── components/
+│   │   │   ├── ui/
+│   │   │   └── layout/
+│   │   ├── lib/
+│   │   │   ├── api/
+│   │   │   │   ├── client.ts
+│   │   │   │   ├── auth.ts
+│   │   │   │   ├── tracker.ts
+│   │   │   │   └── uploads.ts
+│   │   │   ├── utils/
+│   │   │   └── env.ts
+│   │   ├── styles/
+│   │   └── types/
+│   ├── public/
+│   ├── tests/
+│   │   ├── e2e/
+│   │   └── unit/
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── next.config.ts
+└── backend/                           # planned FastAPI service (Docker)
+    ├── app/
+    ├── tests/
+    ├── pyproject.toml
+    └── Dockerfile
+```
+
+**Notes**
+- `frontend/` is currently scaffolded for local development and will be incrementally aligned to the `src/` structure above.
+- **Unit tests location:** `frontend/tests/unit/` for shared/component/service tests, with optional co-located `*.test.ts(x)` files inside `src/features/*` for feature-local coverage.
+- **E2E tests location:** `frontend/tests/e2e/`.
+- `backend/` is shown as planned target structure for upcoming implementation phases.
+- Feature/task documents in `FEATURES/` and `TASKS/` remain the source of truth for scope decomposition.
+
 ### Assumptions
 - “Replicate physical design” = preserve structure/labels/flow, optimized for mobile usability.
 - Evidence image is required to mark completion in MVP.
