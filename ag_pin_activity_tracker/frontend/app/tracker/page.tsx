@@ -1,4 +1,6 @@
 import { SheetLayout } from "@/components/tracker/sheet-layout";
+import { fetchProgressHierarchy, ProgressApiError } from "@/lib/api/progress";
+import { mapProgressHierarchyToSheetSections } from "@/lib/mappers/sheet-mapper";
 
 type AuthenticatedSession = {
   userId: string;
@@ -17,10 +19,20 @@ async function requireAuthenticatedSession(): Promise<AuthenticatedSession> {
 export default async function TrackerPage() {
   const session = await requireAuthenticatedSession();
 
-  // Placeholder runtime states for initial route/layout integration.
-  // These will be driven by the progress read API in task section 2.x.
   const isLoading = false;
-  const sections: Array<{ id: string; title: string }> = [];
+  let sections: Array<{ id: string; title: string }> = [];
+
+  try {
+    const progress = await fetchProgressHierarchy();
+    sections = mapProgressHierarchyToSheetSections(progress);
+  } catch (error) {
+    // Runtime error state UI with retry will be implemented in 4.x.
+    if (error instanceof ProgressApiError) {
+      console.error(`Progress read failed (${error.code})`, error.message);
+    } else {
+      console.error("Unexpected progress read failure", error);
+    }
+  }
 
   return (
     <main

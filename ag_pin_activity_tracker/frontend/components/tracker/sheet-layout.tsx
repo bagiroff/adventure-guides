@@ -1,4 +1,4 @@
-type SheetSection = {
+export type SheetSection = {
   id: string;
   title: string;
 };
