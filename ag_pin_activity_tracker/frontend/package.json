@@ -16,7 +16,7 @@
     "test:verify:ci": "npm run lint && npm run typecheck && npm run test && npm run build && npm run test:e2e"
   },
   "dependencies": {
-    "next": "15.2.2",
+    "next": "15.2.8",
     "react": "19.0.0",
     "react-dom": "19.0.0"
   },
