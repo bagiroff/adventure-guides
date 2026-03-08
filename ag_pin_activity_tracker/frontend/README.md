@@ -31,6 +31,26 @@ Open: `http://localhost:3000`
 npm run test
 ```
 
+## E2E (Playwright)
+
+Install browser binaries once:
+
+```bash
+npx playwright install
+```
+
+Run E2E tests:
+
+```bash
+npm run test:e2e
+```
+
+Run E2E with Playwright UI mode:
+
+```bash
+npm run test:e2e:ui
+```
+
 ## Build
 
 ```bash
@@ -41,4 +61,18 @@ npm run build
 
 ```bash
 npm run typecheck
+```
+
+## Verification pipelines
+
+Local pre-PR verification:
+
+```bash
+npm run test:verify
+```
+
+CI-style full verification (includes E2E):
+
+```bash
+npm run test:verify:ci
 ```

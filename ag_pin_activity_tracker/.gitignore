@@ -26,6 +26,8 @@ frontend/.turbo/
 
 # Testing / tooling artifacts
 .playwright-cli/
+frontend/playwright-report/
+frontend/test-results/
 coverage/
 
 # IDE

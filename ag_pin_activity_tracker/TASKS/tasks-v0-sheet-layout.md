@@ -7,8 +7,11 @@
 - frontend/lib/api/progress.ts - Progress read API client
 - frontend/lib/types/progress.ts - Types for hierarchy/completion payloads
 - frontend/lib/mappers/sheet-mapper.ts - Mapping API payload to UI hierarchy model
-- frontend/components/tracker/sheet-layout.test.tsx - UI rendering and hierarchy tests
-- frontend/lib/mappers/sheet-mapper.test.ts - Mapping logic tests
+- frontend/tests/unit/lib/api/progress.test.ts - Unit tests for progress API read + normalized errors
+- frontend/tests/unit/lib/mappers/sheet-mapper.test.ts - Unit tests for sheet mapping/order behavior
+- frontend/tests/e2e/tracker-smoke.spec.ts - Playwright smoke tests for home/tracker shell routes
+- frontend/playwright.config.ts - Playwright configuration for local + CI E2E runs
+- frontend/vitest.config.ts - Vitest configuration (jsdom + unit test path + alias support)
 
 ### Notes
 
@@ -42,11 +45,13 @@ Example:
   - [x] 1.2 Add top-level `SheetLayout` component and wire route to it
   - [x] 1.3 Add placeholder loading and empty shell states for initial integration
 
-- [ ] 2.0 Define contracts and API read integration
-  - [ ] 2.1 Create TypeScript types for hierarchy, child achievements, and completion state
-  - [ ] 2.2 Implement progress read API client for fetching hierarchy + completion payload
-  - [ ] 2.3 Add error normalization in API client (network, auth, server errors)
-  - [ ] 2.4 Connect route shell to fetch data on load and pass data to layout component
+- [x] 2.0 Define contracts and API read integration
+  - [x] 2.1 Create TypeScript types for hierarchy, child achievements, and completion state
+  - [x] 2.2 Implement progress read API client for fetching hierarchy + completion payload
+  - [x] 2.3 Add error normalization in API client (network, auth, server errors)
+  - [x] 2.4 Connect route shell to fetch data on load and pass data to layout component
+  - [x] 2.5 Add unit tests for progress API read success/failure normalization
+  - [x] 2.6 Add unit test for hierarchy mapper section ordering
 
 - [ ] 3.0 Implement sheet hierarchy rendering components
   - [ ] 3.1 Build section component to render section title/order from payload
@@ -71,6 +76,12 @@ Example:
   - [ ] 6.2 Component test: hierarchy renders in expected structure/order
   - [ ] 6.3 Component test: completed children show correct parent completion state
   - [ ] 6.4 Component test: loading/error/empty states render as expected
+
+- [x] 8.0 Establish frontend testing baseline aligned with PRD best-practice layers
+  - [x] 8.1 Move unit tests to `frontend/tests/unit/` structure
+  - [x] 8.2 Add Vitest config + setup file for consistent unit test environment
+  - [x] 8.3 Add Playwright config and initial smoke E2E tests in `frontend/tests/e2e/`
+  - [x] 8.4 Add npm scripts for `test:e2e`, `test:verify`, and CI-style verification pipeline
 
 - [ ] 7.0 Final validation and documentation
   - [ ] 7.1 Verify implemented behavior against `FEATURES/frontend/v0_sheet_layout.md` acceptance criteria
