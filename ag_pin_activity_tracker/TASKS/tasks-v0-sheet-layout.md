@@ -53,11 +53,11 @@ Example:
   - [x] 2.5 Add unit tests for progress API read success/failure normalization
   - [x] 2.6 Add unit test for hierarchy mapper section ordering
 
-- [ ] 3.0 Implement sheet hierarchy rendering components
-  - [ ] 3.1 Build section component to render section title/order from payload
-  - [ ] 3.2 Build achievement row component to render name, status, and checkbox affordance
-  - [ ] 3.3 Render hierarchy in paper-aligned order from mapped data
-  - [ ] 3.4 Add parent/top-level completion visual indicator derived from child state
+- [x] 3.0 Implement sheet hierarchy rendering components
+  - [x] 3.1 Build section component to render section title/order from payload
+  - [x] 3.2 Build achievement row component to render name, status, and checkbox affordance
+  - [x] 3.3 Render hierarchy in paper-aligned order from mapped data
+  - [x] 3.4 Add parent/top-level completion visual indicator derived from child state
 
 - [ ] 4.0 Implement runtime states and UX resilience
   - [ ] 4.1 Implement loading state (skeleton/spinner) while fetching tracker data

@@ -3,8 +3,25 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { fetchProgressHierarchy } from "../../../../lib/api/progress";
 
 describe("fetchProgressHierarchy", () => {
+  const originalMockFlag = process.env.NEXT_PUBLIC_USE_MOCK_PROGRESS;
+
   afterEach(() => {
+    if (typeof originalMockFlag === "undefined") {
+      delete process.env.NEXT_PUBLIC_USE_MOCK_PROGRESS;
+    } else {
+      process.env.NEXT_PUBLIC_USE_MOCK_PROGRESS = originalMockFlag;
+    }
     vi.restoreAllMocks();
+  });
+
+  it("returns mock hierarchy when NEXT_PUBLIC_USE_MOCK_PROGRESS is enabled", async () => {
+    process.env.NEXT_PUBLIC_USE_MOCK_PROGRESS = "true";
+
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const result = await fetchProgressHierarchy({ baseUrl: "https://api.example.com" });
+
+    expect(result.sections.length).toBeGreaterThan(0);
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 
   it("returns hierarchy payload on successful response", async () => {

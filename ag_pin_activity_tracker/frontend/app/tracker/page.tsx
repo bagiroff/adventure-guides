@@ -1,4 +1,4 @@
-import { SheetLayout } from "@/components/tracker/sheet-layout";
+import { SheetLayout, type SheetSection } from "@/components/tracker/sheet-layout";
 import { fetchProgressHierarchy, ProgressApiError } from "@/lib/api/progress";
 import { mapProgressHierarchyToSheetSections } from "@/lib/mappers/sheet-mapper";
 
@@ -20,7 +20,7 @@ export default async function TrackerPage() {
   const session = await requireAuthenticatedSession();
 
   const isLoading = false;
-  let sections: Array<{ id: string; title: string }> = [];
+  let sections: SheetSection[] = [];
 
   try {
     const progress = await fetchProgressHierarchy();

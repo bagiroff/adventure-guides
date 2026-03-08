@@ -25,6 +25,23 @@ Open: `http://localhost:3000`
 - Home: `/`
 - Tracker shell: `/tracker`
 
+### Local mock progress data (tracker layout preview)
+
+The tracker service layer supports a mock hierarchy payload so you can preview layout states on localhost without a backend.
+
+- In development, mock progress is enabled by default when `NEXT_PUBLIC_USE_MOCK_PROGRESS` is not set.
+- Force enable mock mode:
+
+```bash
+NEXT_PUBLIC_USE_MOCK_PROGRESS=true npm run dev
+```
+
+- Force real API mode (disable mock):
+
+```bash
+NEXT_PUBLIC_USE_MOCK_PROGRESS=false npm run dev
+```
+
 ## Test
 
 ```bash

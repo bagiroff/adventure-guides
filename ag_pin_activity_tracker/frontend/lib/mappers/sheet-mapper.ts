@@ -9,5 +9,14 @@ export function mapProgressHierarchyToSheetSections(
     .map((section) => ({
       id: section.id,
       title: section.title,
+      order: section.order,
+      achievements: [...section.achievements]
+        .sort((left, right) => left.order - right.order)
+        .map((achievement) => ({
+          id: achievement.id,
+          name: achievement.name,
+          order: achievement.order,
+          isCompleted: achievement.completion.isCompleted,
+        })),
     }));
 }

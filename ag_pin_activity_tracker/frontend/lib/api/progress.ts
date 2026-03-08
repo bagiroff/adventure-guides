@@ -19,6 +19,80 @@ type FetchProgressHierarchyOptions = {
   signal?: AbortSignal;
 };
 
+const MOCK_PROGRESS_HIERARCHY_RESPONSE: ProgressHierarchyResponse = {
+  fetchedAt: new Date("2026-01-01T00:00:00.000Z").toISOString(),
+  sections: [
+    {
+      id: "section-character-service",
+      title: "Character & Service",
+      order: 1,
+      achievements: [
+        {
+          id: "achievement-pledge",
+          name: "Memorize and recite the pledge",
+          order: 1,
+          completion: {
+            isCompleted: true,
+            completedAt: new Date("2026-01-03T18:45:00.000Z").toISOString(),
+            evidenceRef: "mock://evidence/pledge-video",
+          },
+        },
+        {
+          id: "achievement-service-project",
+          name: "Help with a family service project",
+          order: 2,
+          completion: {
+            isCompleted: false,
+            completedAt: null,
+            evidenceRef: null,
+          },
+        },
+      ],
+    },
+    {
+      id: "section-outdoor-skills",
+      title: "Outdoor Skills",
+      order: 2,
+      achievements: [
+        {
+          id: "achievement-knots",
+          name: "Tie three basic knots",
+          order: 1,
+          completion: {
+            isCompleted: true,
+            completedAt: new Date("2026-01-05T16:10:00.000Z").toISOString(),
+            evidenceRef: "mock://evidence/knots-photo",
+          },
+        },
+        {
+          id: "achievement-campfire",
+          name: "Build a small campfire safely",
+          order: 2,
+          completion: {
+            isCompleted: false,
+            completedAt: null,
+            evidenceRef: null,
+          },
+        },
+      ],
+    },
+  ],
+};
+
+function isMockProgressEnabled(): boolean {
+  const flag = process.env.NEXT_PUBLIC_USE_MOCK_PROGRESS;
+  if (flag === "true") {
+    return true;
+  }
+
+  // Local-dev default so tracker layout can be exercised without backend wiring.
+  if (process.env.NODE_ENV === "development" && typeof flag === "undefined") {
+    return true;
+  }
+
+  return false;
+}
+
 function normalizeBaseUrl(baseUrl?: string): string {
   const value = baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
   return value.endsWith("/") ? value.slice(0, -1) : value;
@@ -47,6 +121,10 @@ function parseProgressHierarchyResponse(data: unknown): ProgressHierarchyRespons
 export async function fetchProgressHierarchy(
   options: FetchProgressHierarchyOptions = {},
 ): Promise<ProgressHierarchyResponse> {
+  if (isMockProgressEnabled()) {
+    return MOCK_PROGRESS_HIERARCHY_RESPONSE;
+  }
+
   const baseUrl = normalizeBaseUrl(options.baseUrl);
   const endpoint = `${baseUrl}/api/progress`;
 
